@@ -4,9 +4,6 @@ import Game from '../modules/Game.class';
 
 const game = new Game();
 
-game.start();
-render();
-
 document.addEventListener('keydown', (e) => {
   if (game.isGameOver()) {
     return;
@@ -25,10 +22,20 @@ document.addEventListener('keydown', (e) => {
   render();
 });
 
-const startButton = document.querySelector('.button.start');
+const startButton = document.querySelector('.button');
 
 startButton.addEventListener('click', (e) => {
   game.restart();
+  startButton.textContent = 'Restart';
+  startButton.classList.remove('start');
+  startButton.classList.add('restart');
+
+  const startMessage = document.querySelector('.message-start');
+  
+  if (startMessage) {
+    startMessage.classList.add('hidden');
+  }
+
   render();
 });
 
@@ -43,14 +50,15 @@ function render() {
 
       cell.textContent = '';
       cell.className = 'field-cell';
-      
-  const loseMessage = document.querySelector('.message-lose');
 
-  if (game.isGameOver()) {
-    loseMessage.classList.remove('hidden');
-  } else {
-    loseMessage.classList.add('hidden');
-  }
+      const loseMessage = document.querySelector('.message-lose');
+
+      if (game.isGameOver()) {
+        loseMessage.classList.remove('hidden');
+      } else {
+        loseMessage.classList.add('hidden');
+      }
+
       if (board[r][c] > 0) {
         cell.textContent = board[r][c];
         cell.classList.add(`field-cell--${board[r][c]}`);
@@ -59,6 +67,6 @@ function render() {
   }
 
   const scoreElement = document.querySelector('.game-score');
+
   scoreElement.textContent = game.getScore();
 }
-

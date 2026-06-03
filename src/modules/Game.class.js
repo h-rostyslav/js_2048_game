@@ -30,7 +30,6 @@ class Game {
     ];
     this.score = 0;
     this.status = 'idle';
-    console.log(initialState);
   }
 
   moveLeft() {
@@ -173,18 +172,17 @@ class Game {
           return false;
         }
       }
-
-      return true;
     }
+      return true;
   }
 
   addRandomTile() {
     const emptyCells = [];
 
-    for (let row = 0; row < this.board.length; row++) {
-      for (let col = 0; col < this.board[row].length; col++) {
-        if (this.board[row][col] === 0) {
-          emptyCells.push([row, col]);
+    for (let rw = 0; rw < this.board.length; rw++) {
+      for (let cl = 0; cl < this.board[rw].length; cl++) {
+        if (this.board[rw][cl] === 0) {
+          emptyCells.push([rw, cl]);
         }
       }
     }
